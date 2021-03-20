@@ -21,6 +21,7 @@ This project was made with this tecnologies:
 
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
 
 ## Description
 
