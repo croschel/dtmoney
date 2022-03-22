@@ -18,6 +18,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
     'react/function-component-definition': 'off',
+    'no-unused-expressions': 'off',
     'react/jsx-filename-extension': [1, { extensions: ['.tsx'] }],
     'import/extensions': [
       'error',
