@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '~/components/Header';
 import { Dashboard } from '~/components/Dashboard';
+import { NewTransactionModal } from '~/components/NewTransactionModal';
 import ReactModal from 'react-modal';
 import { GlobalStyle } from './styles/global';
 import '~/mock';
@@ -22,9 +23,10 @@ export function App() {
       <Header onOpenNewTransactionModal={handleOpenTransactionModal} />
       <Dashboard />
       <GlobalStyle />
-      <ReactModal onRequestClose={handleCloseTransactionModal} isOpen={isNewTransactionOpened}>
-        <h2>cadastrar transação</h2>
-      </ReactModal>
+      <NewTransactionModal
+        isOpen={isNewTransactionOpened}
+        onRequestClose={handleCloseTransactionModal}
+      />
     </>
   );
 }
