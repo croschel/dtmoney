@@ -5,6 +5,7 @@ import { NewTransactionModal } from '~/components/NewTransactionModal';
 import ReactModal from 'react-modal';
 import { GlobalStyle } from './styles/global';
 import '~/mock';
+import { TransactionContext } from './TransactionContext';
 
 ReactModal.setAppElement('#root');
 
@@ -19,7 +20,8 @@ export function App() {
     setIsNewTransactionOpened(false);
   };
   return (
-    <>
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
+    <TransactionContext.Provider value={[]}>
       <Header onOpenNewTransactionModal={handleOpenTransactionModal} />
       <Dashboard />
       <GlobalStyle />
@@ -27,6 +29,6 @@ export function App() {
         isOpen={isNewTransactionOpened}
         onRequestClose={handleCloseTransactionModal}
       />
-    </>
+    </TransactionContext.Provider>
   );
 }
