@@ -5,7 +5,7 @@ import { NewTransactionModal } from '~/components/NewTransactionModal';
 import ReactModal from 'react-modal';
 import { GlobalStyle } from './styles/global';
 import '~/mock';
-import { TransactionsProvider } from './TransactionContext';
+import { TransactionsProvider } from './hooks/useTransaction';
 
 ReactModal.setAppElement('#root');
 

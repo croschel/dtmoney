@@ -1,9 +1,10 @@
-import React, { FormEvent, useContext, useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import ReactModal from 'react-modal';
 import CloseImg from '~/assets/close.svg';
 import IncomeImg from '~/assets/income.svg';
 import OutcomeImg from '~/assets/outcome.svg';
-import { TransactionContext } from '~/TransactionContext';
+import { useTransaction } from '~/hooks/useTransaction';
+import { GenericLoader } from '../Loader';
 
 import { Container, NewTransactionTypeContainer, RadioBox } from './styles';
 
@@ -14,7 +15,7 @@ interface TransactionModalProps {
 
 // eslint-disable-next-line max-len
 export const NewTransactionModal: React.FC<TransactionModalProps> = ({ isOpen, onRequestClose }) => {
-  const { createTransaction } = useContext(TransactionContext);
+  const { createTransaction, loadingCreateTr } = useTransaction();
   const [formInfo, setFormInfo] = useState({
     title: '',
     value: 0,
@@ -41,7 +42,7 @@ export const NewTransactionModal: React.FC<TransactionModalProps> = ({ isOpen, o
       overlayClassName="react-modal-overlay"
       className="react-modal-content"
     >
-      <button type="button" onClick={onRequestClose}>
+      <button disabled={loadingCreateTr} type="button" onClick={onRequestClose}>
         <img
           className="react-modal-close"
           src={CloseImg}
@@ -63,7 +64,7 @@ export const NewTransactionModal: React.FC<TransactionModalProps> = ({ isOpen, o
           </RadioBox>
         </NewTransactionTypeContainer>
         <input placeholder="Categoria" value={formInfo.category} onChange={({ target }) => setFormInfo({ ...formInfo, category: target.value })} />
-        <button type="submit">Cadastrar</button>
+        <button disabled={loadingCreateTr} type="submit">{loadingCreateTr ? <GenericLoader /> : 'Cadastrar'}</button>
       </Container>
     </ReactModal>
   );

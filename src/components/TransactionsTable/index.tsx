@@ -1,11 +1,12 @@
-import React, { useContext } from 'react';
-import { TransactionContext } from '~/TransactionContext';
-import { Container } from './styles';
+import React from 'react';
+import { useTransaction } from '~/hooks/useTransaction';
+import { GenericLoader } from '../Loader';
+import { Container, LoaderContainer } from './styles';
 
 export const TransactionsTable: React.FC = () => {
-  const { transactions } = useContext(TransactionContext);
+  const { transactions, loadingTransactions } = useTransaction();
 
-  return (
+  return loadingTransactions ? <LoaderContainer><GenericLoader size="large" /></LoaderContainer> : (
     <Container>
       <table>
         <thead>

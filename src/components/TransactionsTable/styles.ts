@@ -34,3 +34,10 @@ export const Container = styled.div`
 
   }
 `;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+`;
