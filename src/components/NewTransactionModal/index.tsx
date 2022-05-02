@@ -1,9 +1,9 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useContext, useState } from 'react';
 import ReactModal from 'react-modal';
 import CloseImg from '~/assets/close.svg';
 import IncomeImg from '~/assets/income.svg';
 import OutcomeImg from '~/assets/outcome.svg';
-import { api } from '~/services/api';
+import { TransactionContext } from '~/TransactionContext';
 
 import { Container, NewTransactionTypeContainer, RadioBox } from './styles';
 
@@ -14,6 +14,7 @@ interface TransactionModalProps {
 
 // eslint-disable-next-line max-len
 export const NewTransactionModal: React.FC<TransactionModalProps> = ({ isOpen, onRequestClose }) => {
+  const { createTransaction } = useContext(TransactionContext);
   const [formInfo, setFormInfo] = useState({
     title: '',
     value: 0,
@@ -23,8 +24,14 @@ export const NewTransactionModal: React.FC<TransactionModalProps> = ({ isOpen, o
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    const response = await api.post('transactions', formInfo);
-    console.log(response.data);
+    await createTransaction(formInfo);
+    onRequestClose();
+    setFormInfo({
+      title: '',
+      value: 0,
+      category: '',
+      type: 'deposit',
+    });
   };
 
   return (

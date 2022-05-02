@@ -31,10 +31,8 @@ export default createServer({
     this.get('transactions', () => this.schema.all('transaction'), { timing: 3000 });
     this.post('transactions', (schema, request) => {
       const data = JSON.parse(request.requestBody);
-      schema.create('transaction', data);
-      return {
-        success: 'ok',
-      };
+      const parsedData = { ...data, createdAt: new Date() };
+      return schema.create('transaction', parsedData);
     }, {
       timing: 3000,
     });
